@@ -417,8 +417,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../FMOD_Project/Brackeys23_fmod_project/Brackeys23_fmod_project.fspro
-  sourceBankPath: ../FMOD_Project/Brackeys23_fmod_project/Build
+  sourceProjectPath: FMOD_Project/Brackeys23_fmod_project/Brackeys23_fmod_project.fspro
+  sourceBankPath: FMOD_Project/Brackeys23_fmod_project/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
