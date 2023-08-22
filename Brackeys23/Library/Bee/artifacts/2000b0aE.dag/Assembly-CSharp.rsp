@@ -99,6 +99,7 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
+-define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
@@ -318,6 +319,8 @@
 -r:"Library/Bee/artifacts/2000b0aE.dag/UniRx.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Unity.Burst.Editor.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Unity.Burst.ref.dll"
+-r:"Library/Bee/artifacts/2000b0aE.dag/Unity.InputSystem.ForUI.ref.dll"
+-r:"Library/Bee/artifacts/2000b0aE.dag/Unity.InputSystem.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Unity.Mathematics.Editor.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Unity.Mathematics.ref.dll"
 -r:"Library/Bee/artifacts/2000b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
@@ -351,6 +354,13 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.1f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.1f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/TutorialInfo/Scripts/Readme.cs"
+"Assets/_01_SCRIPTS/AnimationEvents.cs"
+"Assets/_01_SCRIPTS/CameraTarget.cs"
+"Assets/_01_SCRIPTS/Diving.cs"
+"Assets/_01_SCRIPTS/Oxygen.cs"
+"Assets/_01_SCRIPTS/OxygenUI.cs"
+"Assets/_01_SCRIPTS/PlayerControls.cs"
+"Assets/_01_SCRIPTS/SwimmingAnimation.cs"
 -langversion:9.0
 
 /deterministic
