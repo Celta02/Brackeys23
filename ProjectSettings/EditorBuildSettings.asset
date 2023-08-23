@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/_04_SCENES/VictoryScene.unity
     guid: f4b295c32689dd442abc73797fd1dc2c
   - enabled: 1
-    path: Assets/_04_SCENES/DrawnedScene.unity
+    path: Assets/_04_SCENES/DrownedScene.unity
     guid: 0b87a446dc1f5f845ab31c44195e3198
   m_configObjects: {}
