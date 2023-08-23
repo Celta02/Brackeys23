@@ -10,6 +10,7 @@ namespace CeltaGames
     {
         [SerializeField] SaveManager _saveManager;
         [SerializeField] DiveMeter _diveMeter;
+        [SerializeField] RivalDiveMeter _rivalDiveMeter;
         Collider _collider;
         float _bestRecord;
 
@@ -22,12 +23,14 @@ namespace CeltaGames
 
         void OnReachingSurface(Collider col)
         {
-            if (_diveMeter.MaxDepth.Value >= _bestRecord)
-            {
-                _saveManager.MaxDepth = _diveMeter.MaxDepth.Value;
-                _saveManager.Save();
-            }
-            SceneManager.LoadScene(2);
+            _rivalDiveMeter.SaveRivalsMaxDepth();
+            
+            var data = _saveManager.Load();
+            _saveManager.MaxDepth = _diveMeter.MaxDepth.Value;
+            _saveManager.BestScore = Mathf.Max(data.BestScore, _diveMeter.MaxDepth.Value);
+            _saveManager.Save();
+            data = _saveManager.Load();
+            SceneManager.LoadScene(data.MaxDepth > data.RivalMaxDepth ? 2 : 4);
         }
     }
 }

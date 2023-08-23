@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace CeltaGames
 {
-    public class SwimmingAnimation : MonoBehaviour
+    public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] Animator _animator;
 

@@ -6,7 +6,7 @@ namespace CeltaGames
     public class DiveMeter : MonoBehaviour
     {
         [SerializeField] Transform _player;
-        [SerializeField] float _metersPerPixel = 0.5f;
+        [SerializeField] float _metersPerPixel = 0.25f;
 
         readonly FloatReactiveProperty _currentDepth = new();
         readonly FloatReactiveProperty _maxDepth = new();

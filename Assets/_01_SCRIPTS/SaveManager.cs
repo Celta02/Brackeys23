@@ -7,8 +7,12 @@ namespace CeltaGames
     public class SaveManager : MonoBehaviour
     {
         float _maxDepth;
+        float _rivalMaxDepth;
+        float _bestScore;
 
         public float MaxDepth { set => _maxDepth = value; }
+        public float RivalMaxDepth { set => _rivalMaxDepth = value; }
+        public float BestScore { set => _bestScore = value; }
         
         SaveData _data = new();
         string _path;
@@ -21,6 +25,8 @@ namespace CeltaGames
         public void Save()
         {
             _data.MaxDepth = _maxDepth;
+            _data.RivalMaxDepth = _rivalMaxDepth;
+            _data.BestScore = _bestScore;
 
             var saveJson = JsonUtility.ToJson(_data);
             Debug.Log($"{saveJson} is Saved!");
@@ -36,6 +42,8 @@ namespace CeltaGames
             _data = JsonUtility.FromJson<SaveData>(loadJson);
 
             _maxDepth = _data.MaxDepth;
+            _rivalMaxDepth = _data.RivalMaxDepth;
+            _bestScore = _data.BestScore;
             return _data;
         }
     }
