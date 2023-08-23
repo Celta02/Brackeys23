@@ -1,6 +1,7 @@
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace CeltaGames
 {
@@ -42,6 +43,8 @@ namespace CeltaGames
         void ReduceOxygen(float consumption)
         {
             _currentOxygen.Value -= consumption;
+            if(_currentOxygen.Value <=0f)
+                SceneManager.LoadScene(3);
         }
     }
 }

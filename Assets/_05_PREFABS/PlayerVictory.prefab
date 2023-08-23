@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1273556298467463629, guid: 437a3bc3bc1f35c4d96aae6ca789e22d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3763420494184443305, guid: 437a3bc3bc1f35c4d96aae6ca789e22d,
         type: 3}
       propertyPath: m_Enabled
@@ -92,6 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerVictory
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940503955425678182, guid: 437a3bc3bc1f35c4d96aae6ca789e22d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7144003158029166820, guid: 437a3bc3bc1f35c4d96aae6ca789e22d,
         type: 3}
