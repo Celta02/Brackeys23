@@ -27,7 +27,6 @@ namespace CeltaGames
         void TriggerBreaststrokeAnimation(InputAction.CallbackContext obj) => _animator.SetTrigger(Breaststroking);
         void TriggerTurnBackAnimation(InputAction.CallbackContext obj)
         {
-            Debug.Log($"Turning Back Triggered");
             _animator.SetTrigger(TurningAround);
             _isSwimmingBack = !_isSwimmingBack;
             _animator.SetBool(IsSwimmingBack, _isSwimmingBack);
