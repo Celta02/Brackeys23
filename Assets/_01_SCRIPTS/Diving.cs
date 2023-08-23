@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -85,6 +86,13 @@ namespace CeltaGames
         void TurnAroundImpulse()
         {            
             BreaststrokeImpulse();
+        }
+
+        void OnDestroy()
+        {
+            _initialImpulseTween?.Kill();
+            _strokeFirstTween?.Kill();
+            _strokeSecondTween?.Kill();
         }
     }
 }
