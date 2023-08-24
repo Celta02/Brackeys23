@@ -4,7 +4,6 @@ namespace CeltaGames
 {
     public class RivalDiveMeter : MonoBehaviour
     {
-        [SerializeField] SaveManager _saveManager;
         [SerializeField] AnimationEvents _animationEvents;
         [SerializeField] Transform _rival;
 
@@ -13,14 +12,13 @@ namespace CeltaGames
 
         void Start()
         {
-            _animationEvents.StartTurningAround += SaveRivalsMaxDepth;
+            _animationEvents.StartTurningAround += RegisterRivalsMaxDepth;
         }
 
-        public void SaveRivalsMaxDepth()
+        public void RegisterRivalsMaxDepth()
         {
             _maxDepth = Mathf.Max(_maxDepth, _rival.position.y * -_metersPerPixel);
-            _saveManager.RivalMaxDepth = _maxDepth;
-            _saveManager.Save();
+            SaveManager.Instance.RivalMaxDepth = _maxDepth;
         }
     }
 }

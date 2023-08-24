@@ -1,50 +1,27 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace CeltaGames
 {
-    public class SaveManager : MonoBehaviour
+    public class SaveManager : SingletonPersistent<SaveManager>
     {
-        float _maxDepth;
-        float _rivalMaxDepth;
-        float _bestScore;
+        static SaveData data = new();
+        SaveLoad _saveLoad;
 
-        public float MaxDepth { set => _maxDepth = value; }
-        public float RivalMaxDepth { set => _rivalMaxDepth = value; }
-        public float BestScore { set => _bestScore = value; }
-        
-        SaveData _data = new();
-        string _path;
+        public static SaveData CurrentData => data;
+        public float MaxDepth { set => data.MaxDepth = value; }
+        public float RivalMaxDepth { set => data.RivalMaxDepth = value; }
+        public float BestScore { set => data.BestScore = value; }
+        public void TurnTimes(Queue<long> turnarounds){data.TurnTimes = new List<long>(turnarounds);}
+        public void StrokeTimes(Queue<long> strokes) { data.StrokeTimes = new List<long>(strokes);}
 
-        void Awake()
+        public override void Awake()
         {
-            _path = $"{Application.persistentDataPath}/Brackeys23.save";
+            base.Awake();
+            _saveLoad = new SaveLoad($"{Application.persistentDataPath}/Brackeys23.save");
         }
-
-        public void Save()
-        {
-            _data.MaxDepth = _maxDepth;
-            _data.RivalMaxDepth = _rivalMaxDepth;
-            _data.BestScore = _bestScore;
-
-            var saveJson = JsonUtility.ToJson(_data);
-            Debug.Log($"{saveJson} is Saved!");
-            File.WriteAllText(_path, saveJson);
-        }
-
-        public SaveData Load()
-        {
-            if (!File.Exists(_path))
-                return new SaveData();
-        
-            var loadJson = File.ReadAllText(_path);
-            _data = JsonUtility.FromJson<SaveData>(loadJson);
-
-            _maxDepth = _data.MaxDepth;
-            _rivalMaxDepth = _data.RivalMaxDepth;
-            _bestScore = _data.BestScore;
-            return _data;
-        }
+        void Start() => data = Load();
+        public void Save() => _saveLoad.Save(data);
+        public SaveData Load() => data = _saveLoad.Load();
     }
 }
