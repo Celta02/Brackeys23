@@ -9,6 +9,8 @@ namespace CeltaGames
         SaveLoad _saveLoad;
 
         public static SaveData CurrentData => data;
+        public string PlayerId { set => data.PlayerID = value; }
+        public string PlayerName { set => data.PlayerName = value; }
         public float MaxDepth { set => data.MaxDepth = value; }
         public float RivalMaxDepth { set => data.RivalMaxDepth = value; }
         public float BestScore { set => data.BestScore = value; }
