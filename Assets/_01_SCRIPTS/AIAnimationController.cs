@@ -29,7 +29,7 @@ namespace CeltaGames
 
         void Initialize()
         {
-            _data = SaveManager.CurrentData; 
+            _data = SaveManager.Instance.CurrentData; 
             _strokesQueue = new Queue<long>(_data.StrokeTimes);
             _nextStroke = _strokesQueue.Count >0? _strokesQueue.Dequeue():0;;    
             _turnQueue = new Queue<long>(_data.TurnTimes);

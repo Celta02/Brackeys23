@@ -21,13 +21,6 @@ namespace CeltaGames
             StrokeTimes = new List<long>
             {
                 40,
-                70,
-                150,
-                200,
-                245,
-                318,
-                370,
-                420
             };
         }
 

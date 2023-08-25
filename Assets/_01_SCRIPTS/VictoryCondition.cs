@@ -19,7 +19,7 @@ namespace CeltaGames
         void Awake() => _collider = GetComponent<Collider>();
         void Start()
         {
-            _data = SaveManager.CurrentData;
+            _data = SaveManager.Instance.CurrentData;
             _collider.OnTriggerEnterAsObservable().Subscribe(OnReachingSurface).AddTo(this);
         }
 

@@ -9,7 +9,7 @@ namespace CeltaGames
 
         void Start()
         {
-            _scoreText.text =  $"{SaveManager.CurrentData.BestScore:F2} m";
+            _scoreText.text =  $"{SaveManager.Instance.CurrentData.BestScore:F2} m";
         }
     }
 }

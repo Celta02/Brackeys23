@@ -7,6 +7,6 @@ namespace CeltaGames
     {
         [SerializeField] TMP_Text _textMeshPro;
 
-        void Start() => _textMeshPro.text = $"{SaveManager.CurrentData.MaxDepth:F2} m";
+        void Start() => _textMeshPro.text = $"{SaveManager.Instance.CurrentData.MaxDepth:F2} m";
     }
 }
