@@ -1,27 +1,30 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Unity.Services.CloudSave;
 using UnityEngine;
-using static CeltaGames.WebUrlConstants;
+
 
 namespace CeltaGames
 {
     public class SaveLoad
     {
-        readonly string _path;
-
-        public SaveLoad(string path, MonoBehaviour handler) => _path = path;
-
-        public void Save(SaveData data) => File.WriteAllText(_path,JsonUtility.ToJson(data));
+        public async Task Save(SaveData data)
+        {
+            var paramData = new Dictionary<string, object> { { "SaveData", data } };
+            await CloudSaveService.Instance.Data.ForceSaveAsync(paramData);
+        }
 
         public async Task<SaveData> Load()
         {
+            var data = new SaveData();
             Debug.Log($"loading...");
-            if (File.Exists(_path)) 
-                return JsonUtility.FromJson<SaveData>(await File.ReadAllTextAsync(_path));
-            
-            var result = await WebUtils.Get(LoadDataUrl);
-            return JsonUtility.FromJson<SaveData>(result);
+            var dataDict = await CloudSaveService.Instance.Data.LoadAsync();
 
+            if (dataDict.ContainsKey("SaveData"))
+                data = JsonConvert.DeserializeObject<SaveData>(dataDict["SaveData"]);
+
+            return data;
         }
     }
 }

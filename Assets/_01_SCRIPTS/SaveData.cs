@@ -4,7 +4,6 @@ namespace CeltaGames
 {
     public class SaveData
     {
-        public string PlayerID;
         public string PlayerName;
         public float MaxDepth;
         public float RivalMaxDepth;
@@ -14,13 +13,19 @@ namespace CeltaGames
 
         public SaveData()
         {
-            PlayerID = "";
             PlayerName = "";
             MaxDepth = 0f;
             TurnTimes = new List<long> { 180 };
             StrokeTimes = new List<long>
             {
                 40,
+                70,
+                150,
+                200,
+                245,
+                318,
+                370,
+                420
             };
         }
 

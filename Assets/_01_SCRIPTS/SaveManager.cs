@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace CeltaGames
 {
@@ -10,7 +9,6 @@ namespace CeltaGames
         SaveLoad _saveLoad;
 
         public SaveData CurrentData => _data;
-        public string PlayerId { set => _data.PlayerID = value; }
         public string PlayerName { set => _data.PlayerName = value; }
         public float MaxDepth { set => _data.MaxDepth = value; }
         public float RivalMaxDepth { set => _data.RivalMaxDepth = value; }
@@ -21,15 +19,10 @@ namespace CeltaGames
         public override void Awake()
         {
             base.Awake();
-            _saveLoad = new SaveLoad($"{Application.persistentDataPath}/Brackeys23.save",this);
+            _saveLoad = new SaveLoad();
         }
-        async void Start()
-        {
-            _data = await Load();
-            Debug.Log($"Best Saved Score: {_data.BestScore}");
-        }
-
-        public void Save() => _saveLoad.Save(_data);
+        
+        public async Task Save() => await _saveLoad.Save(_data);
         public async Task<SaveData> Load() => _data = await _saveLoad.Load();
     }
 }

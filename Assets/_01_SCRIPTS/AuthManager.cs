@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -8,25 +7,21 @@ namespace CeltaGames
 {
     public class AuthManager : MonoBehaviour
     {
-        async void Start()
-        {
-            await UnityServices.InitializeAsync();
-            await SignInAnonymous();
-        }
+        void Start() => GamePlayManager.Instance.CheckRegistration += Register;
 
-        async Task SignInAnonymous()
+        async Task Register()
         {
+            Debug.Log($"Registering...");
+            await UnityServices.InitializeAsync();
             try
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 
                 Debug.Log($"Sign In Success");
-                Debug.Log($"Player ID: {AuthenticationService.Instance.PlayerId}");
-                // SaveManager.Instance.PlayerId = AuthenticationService.Instance.PlayerId;
             }
             catch (AuthenticationException e)
             {
-                Console.WriteLine(e);
+                Debug.Log($"Error: {e}");
                 throw;
             }
         }
