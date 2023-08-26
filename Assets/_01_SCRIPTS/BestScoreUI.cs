@@ -7,9 +7,8 @@ namespace CeltaGames
     {
         [SerializeField] TMP_Text _scoreText;
 
-        void Start()
-        {
-            _scoreText.text =  $"{SaveManager.Instance.CurrentData.BestScore:F2} m";
-        }
+        void Start() => GamePlayManager.Instance.ShowBestScoreEvent += UpdateScore;
+
+        void UpdateScore() => _scoreText.text =  $"{SaveManager.Instance.CurrentData.BestScore:F2} m";
     }
 }

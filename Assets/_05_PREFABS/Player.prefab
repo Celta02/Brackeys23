@@ -556,6 +556,7 @@ MonoBehaviour:
   _initialOxygen: 10000
   _oxygenConsumption: 1
   _strokeOxygenConsumption: 250
+  _animationEvents: {fileID: 7207706716453437665}
 --- !u!114 &7144003158029166820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bca426fd3e14b7d8c0f28880b22b770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: {fileID: 0}
 --- !u!1 &8156871643072532214
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 5296959089610340300}
   - component: {fileID: 6015385486088993431}
   - component: {fileID: 6940503955425678182}
+  - component: {fileID: 4546125833618567570}
   m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
@@ -688,3 +689,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4546125833618567570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156871643072532214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca02a4536454404cb9ee8fd9f45e2994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 8051046231005909062}

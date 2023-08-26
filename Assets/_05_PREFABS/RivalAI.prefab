@@ -539,7 +539,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8051046231005909062}
-  _timer: {fileID: 0}
 --- !u!114 &7103623266772151257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1015d0c6143749709ae9202fcd72b54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saveManager: {fileID: 0}
   _animationEvents: {fileID: 7207706716453437665}
   _rival: {fileID: 6764928401961577494}
 --- !u!1 &8156871643072532214
@@ -567,7 +565,8 @@ GameObject:
   - component: {fileID: 5296959089610340300}
   - component: {fileID: 6015385486088993431}
   - component: {fileID: 6940503955425678182}
-  m_Layer: 0
+  - component: {fileID: 3056164228263906831}
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,3 +659,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3056164228263906831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8156871643072532214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d6f612369b44988949439985a2d99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 8051046231005909062}

@@ -10,13 +10,11 @@ namespace CeltaGames
         public event Func<Task> CheckRegistration;
         public event Action OpenRegisterNameEvent = delegate {};
         public event Action CloseRegisterNameEvent = delegate {};
+        public event Action ShowBestScoreEvent = delegate {};
         
         SaveData _data;
         
-        async void Start()
-        {
-            await PlayerRegistration();
-        }
+        async void Start() => await PlayerRegistration();
 
         async Task PlayerRegistration()
         {
@@ -24,6 +22,9 @@ namespace CeltaGames
             _data = await SaveManager.Instance.Load();
             if (_data.PlayerName == "")
                 OpenRegisterNameEvent?.Invoke();
+            else
+                ShowBestScoreEvent?.Invoke();
+                
         }
 
         public async Task RegisterName(string playerName)
@@ -31,6 +32,9 @@ namespace CeltaGames
             SaveManager.Instance.PlayerName = playerName;
             await SaveManager.Instance.Save();
             CloseRegisterNameEvent?.Invoke();
+            ShowBestScoreEvent?.Invoke();
         }
+        
+        
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -23,22 +22,21 @@ namespace CeltaGames
         [SerializeField] Ease _strokeFirstSpeedEase = Ease.InExpo;
         [SerializeField] Ease _strokeSecondSpeedEase = Ease.OutExpo;
         
-
         float _currentSpeed;
+        bool _hasStopped;
         Tween _initialImpulseTween;
         Tween _strokeFirstTween;
         Tween _strokeSecondTween;
-
-
-
+        
         void Start()
         {
             InitialImpulse();
             _animationEvents.BreaststrokeImpulse += BreaststrokeImpulse;
             _animationEvents.StartTurningAround += TurnAroundDeceleration;
             _animationEvents.StopTurningAround += TurnAroundImpulse;
+            _animationEvents.StopSwimming += StopMovement;
         }
-
+        
         void InitialImpulse()
         {
             _currentSpeed = _initialSpeed;
@@ -78,14 +76,22 @@ namespace CeltaGames
                 .OnUpdate(() => _rigidbody.velocity = _currentSpeed * _model.up);
         }
 
-        void TurnAroundDeceleration()
-        {
-            _rigidbody.velocity = Vector3.zero;
-        }
-        
+        void TurnAroundDeceleration() => _rigidbody.velocity = Vector3.zero;
+
         void TurnAroundImpulse()
         {            
             BreaststrokeImpulse();
+        }
+        void StopMovement()
+        {
+            if (_hasStopped) return;
+            _hasStopped = true;
+            _initialImpulseTween.Kill();
+            _strokeFirstTween.Kill();
+            _strokeSecondTween.Kill();
+            _rigidbody.velocity = Vector3.zero;
+            transform.DOMoveY(0f, 0.5f);
+            Debug.Log($"Stop");
         }
 
         void OnDestroy()

@@ -6,7 +6,7 @@ namespace CeltaGames
     {
         [SerializeField] Transform _player;
 
-        void LateUpdate()
+        void FixedUpdate()
         {
             transform.position = _player.position;
         }
