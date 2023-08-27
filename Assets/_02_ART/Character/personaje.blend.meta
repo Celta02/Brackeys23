@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: e9ab7e7547167754dbbbfd01d911e81c
+guid: 9ebecd5bca65d684ca686e9812326221
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cuerpo
+    second: {fileID: 2100000, guid: dd0a171e484fe144783ca963aaa89cfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pantalon
+    second: {fileID: 2100000, guid: c8ab1943f2fe3714e8335a3599d3e24d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -23,8 +33,8 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 1
-    animationCompression: 3
+    importConstraints: 0
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -91,9 +101,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Empty
+    rootMotionBoneName: cuerpo
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
