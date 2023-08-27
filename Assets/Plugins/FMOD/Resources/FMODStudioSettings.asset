@@ -441,7 +441,10 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
-  Banks: []
+  Banks:
+  - ExteriorEnvironment
+  - SFX
+  - UnderwaterEnvironment
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
