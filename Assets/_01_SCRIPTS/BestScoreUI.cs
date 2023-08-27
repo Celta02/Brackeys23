@@ -9,6 +9,6 @@ namespace CeltaGames
 
         void Start() => GamePlayManager.Instance.ShowBestScoreEvent += UpdateScore;
 
-        void UpdateScore() => _scoreText.text =  $"{SaveManager.Instance.CurrentData.BestScore:F2} m";
+        void UpdateScore() => _scoreText.text =  $"{SaveManager.Instance.GetBestScore():F2} m";
     }
 }

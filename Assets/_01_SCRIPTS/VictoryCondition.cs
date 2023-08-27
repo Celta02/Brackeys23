@@ -12,7 +12,7 @@ namespace CeltaGames
         [SerializeField] RivalDiveMeter _rivalDiveMeter;
         [SerializeField] PlayerBehaviourRecord _record;
 
-        SaveData _data;
+        SaveManager _saveManager;
         Collider _collider;
         float _bestRecord;
         bool _playerHasReached;
@@ -21,7 +21,7 @@ namespace CeltaGames
         void Awake() => _collider = GetComponent<Collider>();
         void Start()
         {
-            _data = SaveManager.Instance.CurrentData;
+            _saveManager = SaveManager.Instance;
             _collider.OnTriggerEnterAsObservable().Subscribe(OnReachingSurface).AddTo(this);
         }
 
@@ -46,16 +46,16 @@ namespace CeltaGames
         async void CheckResults()
         {
             _rivalDiveMeter.RegisterRivalsMaxDepth();
-            _data.MaxDepth = _diveMeter.MaxDepth.Value;
+            _saveManager.MaxDepth = _diveMeter.MaxDepth.Value;
             
-            if (_diveMeter.MaxDepth.Value > _data.BestScore)
+            if (_diveMeter.MaxDepth.Value > _saveManager.GetBestScore())
             {
                 SaveManager.Instance.BestScore = _diveMeter.MaxDepth.Value;
                 _record.RegisterBehaviour();
             }
             await SaveManager.Instance.Save();
             
-            if (_data.MaxDepth > _data.RivalMaxDepth)
+            if (_saveManager.GetMaxDepth() > _saveManager.GetRivalMaxDepth())
                 WinCondition();
             else
                 DefeatCondition();

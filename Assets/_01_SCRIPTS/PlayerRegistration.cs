@@ -15,7 +15,12 @@ namespace CeltaGames
             GamePlayManager.Instance.CloseRegisterNameEvent += HideRegistration;
         }
         void ShowRegistration() => _playerRegistration.SetActive(true);
+
         void HideRegistration() => _playerRegistration.SetActive(false);
-        public async void OnOk() => await GamePlayManager.Instance.RegisterName(_input.text);
+        public async void OnOk()
+        {
+            await GamePlayManager.Instance.RegisterName(_input.text);
+            await AuthManager.UpdateNameAsync(_input.text);
+        }
     }
 }

@@ -5,18 +5,16 @@ using UnityEngine;
 
 namespace CeltaGames
 {
-    public class AuthManager : MonoBehaviour
+    public static class AuthManager
     {
-        void Start() => GamePlayManager.Instance.CheckRegistration += Register;
-
-        async Task Register()
+        public static async Task RegisterAsync()
         {
             Debug.Log($"Registering...");
             await UnityServices.InitializeAsync();
             try
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
-                
+                GamePlayManager.SavePlayerId(AuthenticationService.Instance.PlayerId);
                 Debug.Log($"Sign In Success");
             }
             catch (AuthenticationException e)
@@ -25,5 +23,8 @@ namespace CeltaGames
                 throw;
             }
         }
+
+        public static async Task UpdateNameAsync(string name) => 
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
     }
 }

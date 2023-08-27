@@ -8,7 +8,7 @@ namespace CeltaGames
     {
         [SerializeField] Animator _animator;
 
-        SaveData _data;
+        SaveManager _saveManager;
         Queue<long> _strokesQueue;
         Queue<long> _turnQueue;
         long _nextStroke;
@@ -29,10 +29,10 @@ namespace CeltaGames
 
         void Initialize()
         {
-            _data = SaveManager.Instance.CurrentData; 
-            _strokesQueue = new Queue<long>(_data.StrokeTimes);
+            _saveManager = SaveManager.Instance;
+            _strokesQueue = new Queue<long>(_saveManager.GetStrokeTimes());
             _nextStroke = _strokesQueue.Count >0? _strokesQueue.Dequeue():0;;    
-            _turnQueue = new Queue<long>(_data.TurnTimes);
+            _turnQueue = new Queue<long>(_saveManager.GetTurnTimes());
             _nextTurn = _turnQueue.Dequeue();
         }
 
