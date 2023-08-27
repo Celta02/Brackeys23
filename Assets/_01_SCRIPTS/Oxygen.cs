@@ -46,7 +46,7 @@ namespace CeltaGames
         {
             _currentOxygen.Value -= consumption;
             if(_currentOxygen.Value <=0f)
-                SceneManager.LoadScene(3);
+                GamePlayManager.Instance.LoadDrownScene();
         }
         void StopOxygenConsumption() => _isInApnea = false;
     }
