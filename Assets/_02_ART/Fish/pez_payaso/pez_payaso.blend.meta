@@ -3,7 +3,12 @@ guid: fa8c794fdd878464d950c2cf5d5120c2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pez_payaso
+    second: {fileID: 2100000, guid: b50ecff7f49c9bb469f159f6dff8689f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
