@@ -8,7 +8,8 @@ namespace CeltaGames
 
         void FixedUpdate()
         {
-            transform.position = _player.position;
+            var pos = transform.position;
+            transform.position = new Vector3(pos.x, _player.position.y, pos.z)  ;
         }
     }
 }
