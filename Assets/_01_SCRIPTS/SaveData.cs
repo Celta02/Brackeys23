@@ -10,23 +10,26 @@ namespace CeltaGames
         public float BestScore;
         public List<long> TurnTimes;
         public List<long> StrokeTimes;
-
-        public SaveData()
+        
+        public SaveData DefaultData()
         {
-            PlayerName = "";
-            MaxDepth = 0f;
-            TurnTimes = new List<long> { 180 };
-            StrokeTimes = new List<long>
+            var data = new SaveData
             {
-                40,
-                70,
-                150,
-                200,
-                245,
-                318,
-                370,
-                420
+                PlayerName = "",
+                TurnTimes = new List<long> { 180 },
+                StrokeTimes = new List<long>
+                {
+                    40,
+                    70,
+                    150,
+                    200,
+                    245,
+                    318,
+                    370,
+                    420
+                }
             };
+            return data;
         }
 
     }

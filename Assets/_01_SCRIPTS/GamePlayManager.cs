@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CeltaGames
 {
@@ -11,9 +12,11 @@ namespace CeltaGames
         public event Action ShowBestScoreEvent = delegate {};
         
         static string playerId;
+        static string accessToken;
         
         SaveData _data;
         readonly SceneLoader _sceneLoader = new SceneLoader();
+        readonly LeaderboardManager _leaderboard = new LeaderboardManager();
 
         async void Start() => await PlayerRegistration();
 
@@ -36,11 +39,25 @@ namespace CeltaGames
             ShowBestScoreEvent?.Invoke();
         }
         public static void SavePlayerId(string id) => playerId = id;
-        
+        public static void SaveAccessToken(string token) => accessToken = token;
+
         public async void LoadStartScene() => await _sceneLoader.LoadStartScene();
         public async void LoadMainScene() => await _sceneLoader.LoadMainScene();
-        public async void LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
+        async void LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
         public async void LoadDrownScene() => await _sceneLoader.LoadDrownScene();
-        public async void LoadDefeatScene() => await _sceneLoader.LoadDefeatScene();
+        async void LoadDefeatScene() => await _sceneLoader.LoadDefeatScene();
+
+        [ContextMenu("Test Leaderboard")]
+        public async void Win(float bestScore)
+        {
+            var playerResults =await _leaderboard.SubmitPlayerScore(playerId, bestScore, accessToken);
+            Debug.Log($"{playerResults.playerId}");
+            Debug.Log($"{playerResults.playerName}");
+            Debug.Log($"{playerResults.rank}");
+            Debug.Log($"{playerResults.score}");
+            LoadVictoryScene();
+        }
+
+        public void Defeat() => LoadDefeatScene();
     }
 }

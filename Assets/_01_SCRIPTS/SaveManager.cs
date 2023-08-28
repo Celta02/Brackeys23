@@ -19,6 +19,7 @@ namespace CeltaGames
         public float GetRivalMaxDepth() => _data.RivalMaxDepth;
         public float GetBestScore() => _data.BestScore;
         public List<long> GetTurnTimes() => _data.TurnTimes;
+
         public List<long> GetStrokeTimes() => _data.StrokeTimes;
 
         public override void Awake()

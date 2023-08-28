@@ -16,14 +16,12 @@ namespace CeltaGames
         async Task LoadSceneAsync(int sceneIndex)
         {
             var scene = SceneManager.LoadSceneAsync(sceneIndex);
-            scene.allowSceneActivation = false;
             while (!scene.isDone)
             {
                 //float progress = Mathf.Clamp01(scene.progress / 0.9f);
                 //progress filling animation
                 await Task.Yield();
             }
-            scene.allowSceneActivation = true;
         }
         
     }

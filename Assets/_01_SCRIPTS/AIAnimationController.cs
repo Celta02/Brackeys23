@@ -31,7 +31,7 @@ namespace CeltaGames
         {
             _saveManager = SaveManager.Instance;
             _strokesQueue = new Queue<long>(_saveManager.GetStrokeTimes());
-            _nextStroke = _strokesQueue.Count >0? _strokesQueue.Dequeue():0;;    
+            _nextStroke = _strokesQueue.Count >0? _strokesQueue.Dequeue():0;   
             _turnQueue = new Queue<long>(_saveManager.GetTurnTimes());
             _nextTurn = _turnQueue.Dequeue();
         }

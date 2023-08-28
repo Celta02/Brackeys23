@@ -17,13 +17,15 @@ namespace CeltaGames
 
         public async Task<SaveData> Load()
         {
-            var data = new SaveData();
             Debug.Log($"loading...");
             var dataDict = await CloudSaveService.Instance.Data.LoadAsync();
 
-            if (dataDict.ContainsKey("SaveData"))
-                data = JsonConvert.DeserializeObject<SaveData>(dataDict["SaveData"]);
-
+            var data = dataDict.ContainsKey("SaveData") 
+                ? JsonConvert.DeserializeObject<SaveData>(dataDict["SaveData"]) 
+                : new SaveData().DefaultData();
+            
+            Debug.Log($"Data Loaded");
+            // File.WriteAllText(Application.persistentDataPath + "/LoadedDataTest.save", test);
             return data;
         }
     }

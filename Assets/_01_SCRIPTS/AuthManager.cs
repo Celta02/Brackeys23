@@ -15,6 +15,8 @@ namespace CeltaGames
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 GamePlayManager.SavePlayerId(AuthenticationService.Instance.PlayerId);
+                GamePlayManager.SaveAccessToken(AuthenticationService.Instance.AccessToken);
+                
                 Debug.Log($"Sign In Success");
             }
             catch (AuthenticationException e)

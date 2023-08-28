@@ -55,17 +55,10 @@ namespace CeltaGames
             }
             await SaveManager.Instance.Save();
 
-            if (!(_saveManager.GetMaxDepth() > _saveManager.GetRivalMaxDepth()))
-            {
-                DefeatCondition();
-                return;
-            }
-            
-            
-            WinCondition();
+            if (_saveManager.GetMaxDepth() > _saveManager.GetRivalMaxDepth())
+                GamePlayManager.Instance.Win(_saveManager.GetBestScore());
+            else
+                GamePlayManager.Instance.Defeat();
         }
-
-        void WinCondition() => GamePlayManager.Instance.LoadVictoryScene();
-        void DefeatCondition() => GamePlayManager.Instance.LoadDefeatScene();
     }
 }
