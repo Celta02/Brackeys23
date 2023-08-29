@@ -31,6 +31,7 @@ namespace CeltaGames
             {
                 _playerHasReached = true;
                 p.StopSwimming();
+                GamePlayManager.Instance.ArrivedToSurface();
             }
 
             if (col.gameObject.TryGetComponent(out RivalsHead r))

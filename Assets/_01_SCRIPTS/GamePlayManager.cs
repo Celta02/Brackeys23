@@ -9,6 +9,11 @@ namespace CeltaGames
         // public event Func<Task> CheckRegistration;
         public event Action OpenRegisterNameEvent = delegate {};
         public event Action CloseRegisterNameEvent = delegate {};
+        public event Action StartMainSceneEvent = delegate {};
+        public event Action ArrivedToSurfaceEvent = delegate {};
+        public event Action StartVictorySceneEvent = delegate {};
+        public event Action StartDefeatSceneEvent = delegate {};
+        public event Action StartDrownSceneEvent = delegate {};
         public event Action ShowBestScoreEvent = delegate {};
         public event Action<LeaderboardGroup,string> ShowLeaderboardEvent = delegate {};
         
@@ -43,12 +48,17 @@ namespace CeltaGames
         public static void SaveAccessToken(string token) => accessToken = token;
 
         public async void LoadStartScene() => await _sceneLoader.LoadStartScene();
-        public async void LoadMainScene() => await _sceneLoader.LoadMainScene();
+        public async void LoadMainScene()
+        {
+            await _sceneLoader.LoadMainScene();
+            StartMainSceneEvent?.Invoke();
+        }
+
         async Task LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
         public async void LoadDrownScene() => await _sceneLoader.LoadDrownScene();
         async void LoadDefeatScene() => await _sceneLoader.LoadDefeatScene();
 
-        [ContextMenu("Test Leaderboard")]
+        public void ArrivedToSurface() => ArrivedToSurfaceEvent?.Invoke();
         public async void Win(float bestScore)
         {
             var playerResults =await _leaderboard.SubmitPlayerScore(playerId, bestScore, accessToken);
