@@ -10,6 +10,7 @@ namespace CeltaGames
         public event Action OpenRegisterNameEvent = delegate {};
         public event Action CloseRegisterNameEvent = delegate {};
         public event Action ShowBestScoreEvent = delegate {};
+        public event Action<LeaderboardGroup,string> ShowLeaderboardEvent = delegate {};
         
         static string playerId;
         static string accessToken;
@@ -43,7 +44,7 @@ namespace CeltaGames
 
         public async void LoadStartScene() => await _sceneLoader.LoadStartScene();
         public async void LoadMainScene() => await _sceneLoader.LoadMainScene();
-        async void LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
+        async Task LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
         public async void LoadDrownScene() => await _sceneLoader.LoadDrownScene();
         async void LoadDefeatScene() => await _sceneLoader.LoadDefeatScene();
 
@@ -51,11 +52,9 @@ namespace CeltaGames
         public async void Win(float bestScore)
         {
             var playerResults =await _leaderboard.SubmitPlayerScore(playerId, bestScore, accessToken);
-            Debug.Log($"{playerResults.playerId}");
-            Debug.Log($"{playerResults.playerName}");
-            Debug.Log($"{playerResults.rank}");
-            Debug.Log($"{playerResults.score}");
-            LoadVictoryScene();
+            await LoadVictoryScene();
+            var scoresRange = await _leaderboard.GetScoresRange(playerId, accessToken);
+            ShowLeaderboardEvent?.Invoke(scoresRange, playerId);
         }
 
         public void Defeat() => LoadDefeatScene();

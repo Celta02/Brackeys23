@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -16,17 +17,17 @@ namespace CeltaGames
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 GamePlayManager.SavePlayerId(AuthenticationService.Instance.PlayerId);
                 GamePlayManager.SaveAccessToken(AuthenticationService.Instance.AccessToken);
-                
+
                 Debug.Log($"Sign In Success");
             }
-            catch (AuthenticationException e)
+            catch (Exception e)
             {
                 Debug.Log($"Error: {e}");
                 throw;
             }
+
         }
 
-        public static async Task UpdateNameAsync(string name) => 
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
+        public static async Task UpdateNameAsync(string name) => await AuthenticationService.Instance.UpdatePlayerNameAsync(name);
     }
 }

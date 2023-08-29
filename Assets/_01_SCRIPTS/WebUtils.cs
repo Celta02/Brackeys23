@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.Networking;
 using static UnityEngine.Networking.UnityWebRequest.Result;
@@ -11,15 +10,30 @@ namespace CeltaGames
 {
     public static class WebUtils
     {
-        public static async Task<string> Get(string url)
+        public static async Task<LeaderboardGroup> GetScoresRange(string url, string accessToken)
         {
-            using var request = UnityWebRequest.Get(url);
-            request.SetRequestHeader("Content-Type","application/json");
-            var operation = request.SendWebRequest();
-            while (!operation.isDone) await Task.Yield();
+            try
+            {
+                using var request = UnityWebRequest.Get(url);
+                request.SetRequestHeader("Content-Type","application/json");
+                request.SetRequestHeader("Authorization",$"Bearer {accessToken}");
+                var operation = request.SendWebRequest();
+                while (!operation.isDone) await Task.Yield();
 
-            return request.result is ConnectionError or ProtocolError ? 
-                request.error : request.downloadHandler.text;
+                if (request.result is ConnectionError or ProtocolError)
+                {
+                    Debug.LogError($"error: {request.error}");
+                    await File.WriteAllTextAsync(Application.persistentDataPath + "/LeaderboardConnectionError.save", request.downloadHandler.text);
+                }
+                
+                var result = JsonConvert.DeserializeObject<LeaderboardGroup>(request.downloadHandler.text);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                throw;
+            }
         }
 
         public static async Task<LeaderboardSingle> PostScore(string path, LeaderboardScore score, string accessToken)
