@@ -443,6 +443,7 @@ MonoBehaviour:
   - Master
   Banks:
   - ExteriorEnvironment
+  - Music
   - SFX
   - UnderwaterEnvironment
   BanksToLoad: []

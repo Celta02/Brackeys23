@@ -1230,14 +1230,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fa02d95f504493837a552d4414f335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _exteriorAmbience:
+  _mainTheme:
+    Guid:
+      Data1: 1272674034
+      Data2: 1219795057
+      Data3: -1313295947
+      Data4: -413379731
+    Path: event:/MainTheme
+  _mainThemeEnd:
+    Guid:
+      Data1: -1317374663
+      Data2: 1094612498
+      Data3: -1882448484
+      Data4: 1694662605
+    Path: event:/MainThemeEnd
+  _VictoryTheme:
+    Guid:
+      Data1: -1084083179
+      Data2: 1126496438
+      Data3: 1644069550
+      Data4: 891901527
+    Path: event:/VictoryMusic
+  _defeatTheme:
+    Guid:
+      Data1: -308211870
+      Data2: 1086922017
+      Data3: 769056419
+      Data4: -446230874
+    Path: event:/DefeatMusic
+  _drownTheme:
+    Guid:
+      Data1: 523339266
+      Data2: 1173942771
+      Data3: 1354665859
+      Data4: -510107009
+    Path: event:/DrownMusic
+  _exterior:
     Guid:
       Data1: -416685301
       Data2: 1252851383
       Data3: 1359825555
       Data4: 1892524163
     Path: event:/BeachAmbience
-  _underWaterAmbience:
+  _underWater:
     Guid:
       Data1: 1285514610
       Data2: 1100883100

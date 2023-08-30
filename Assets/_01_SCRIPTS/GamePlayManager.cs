@@ -55,14 +55,24 @@ namespace CeltaGames
         }
 
         async Task LoadVictoryScene() => await _sceneLoader.LoadVictoryScene();
-        public async void LoadDrownScene() => await _sceneLoader.LoadDrownScene();
-        async void LoadDefeatScene() => await _sceneLoader.LoadDefeatScene();
+        public async void LoadDrownScene()
+        {
+            await _sceneLoader.LoadDrownScene();
+            StartDrownSceneEvent?.Invoke();
+        }
+
+        async void LoadDefeatScene()
+        {
+            await _sceneLoader.LoadDefeatScene();
+            StartDefeatSceneEvent?.Invoke();
+        }
 
         public void ArrivedToSurface() => ArrivedToSurfaceEvent?.Invoke();
         public async void Win(float bestScore)
         {
             var playerResults =await _leaderboard.SubmitPlayerScore(playerId, bestScore, accessToken);
             await LoadVictoryScene();
+            StartVictorySceneEvent?.Invoke();
             var scoresRange = await _leaderboard.GetScoresRange(playerId, accessToken);
             ShowLeaderboardEvent?.Invoke(scoresRange, playerId);
         }

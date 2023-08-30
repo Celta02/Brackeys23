@@ -2,14 +2,23 @@
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using static FMOD.Studio.STOP_MODE;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 namespace CeltaGames
 {
     public class AudioManager : SingletonPersistent<AudioManager>
     {
-        [SerializeField] EventReference _exteriorAmbience;
-        [SerializeField] EventReference _underWaterAmbience;
+        [Header("Music")]
+        [SerializeField] EventReference _mainTheme;
+        [SerializeField] EventReference _mainThemeEnd;
+        [SerializeField] EventReference _VictoryTheme;
+        [SerializeField] EventReference _defeatTheme;
+        [SerializeField] EventReference _drownTheme;
+        
+        [Header("Ambience")]
+        [SerializeField] EventReference _exterior;
+        [SerializeField] EventReference _underWater;
         // [SerializeField] StudioEventEmitter _attack1;
 
         [Header("3D Ambience Music Origin")] 
@@ -18,40 +27,75 @@ namespace CeltaGames
         [Tooltip("Height Distance where exterior ambience music will come from in Main Scene.")]
         [SerializeField] float _exteriorHeightDistance = 10f;
 
-        EventInstance _exterior;
-        EventInstance _underWater;
+        EventInstance _mainThemeInstance;
+        EventInstance _exteriorInstance;
+        EventInstance _underWaterInstance;
+        EventInstance _mainThemeEndInstance;
+        EventInstance _victoryThemeInstance;
+        EventInstance _defeatThemeInstance;
+        EventInstance _drownThemeInstance;
 
         void Start()
         {
-            SetupMainMenuScene();
+            SetupEventInstances();
+            _exteriorInstance.start();
+        }
+
+        void OnEnable()
+        {
             GamePlayManager.Instance.StartMainSceneEvent += SetupMainScene;
             GamePlayManager.Instance.ArrivedToSurfaceEvent += SetupWhenArrivedToSurface;
+            GamePlayManager.Instance.StartVictorySceneEvent += SetupVictoryScene;
+            GamePlayManager.Instance.StartDefeatSceneEvent += SetupDefeatScene;
+            GamePlayManager.Instance.StartDrownSceneEvent += SetupDrownScene;
         }
         void OnDisable()
         {
             GamePlayManager.Instance.StartMainSceneEvent -= SetupMainScene;
             GamePlayManager.Instance.ArrivedToSurfaceEvent -= SetupWhenArrivedToSurface;
+            GamePlayManager.Instance.StartVictorySceneEvent -= SetupVictoryScene;
+            GamePlayManager.Instance.StartDefeatSceneEvent -= SetupDefeatScene;
+            GamePlayManager.Instance.StartDrownSceneEvent -= SetupDrownScene;
         }
 
-        void SetupMainMenuScene()
+        void SetupEventInstances()
         {
-            _exterior = RuntimeManager.CreateInstance(_exteriorAmbience);
-            _exterior.set3DAttributes(_exteriorTransform.To3DAttributes());
-            _exterior.start();
+            _mainThemeInstance = RuntimeManager.CreateInstance(_mainTheme);
+            _mainThemeEndInstance = RuntimeManager.CreateInstance(_mainThemeEnd);
+            _victoryThemeInstance = RuntimeManager.CreateInstance(_VictoryTheme);
+            _defeatThemeInstance = RuntimeManager.CreateInstance(_defeatTheme);
+            _drownThemeInstance = RuntimeManager.CreateInstance(_drownTheme);
 
-            _underWater = RuntimeManager.CreateInstance(_underWaterAmbience);
-            _underWater.set3DAttributes(_underWaterTransform.To3DAttributes());
+            
+            _exteriorInstance = RuntimeManager.CreateInstance(_exterior);
+            _exteriorInstance.set3DAttributes(_exteriorTransform.To3DAttributes());
+            
+            _underWaterInstance = RuntimeManager.CreateInstance(_underWater);
+            _underWaterInstance.set3DAttributes(_underWaterTransform.To3DAttributes());
         }
         void SetupMainScene()
         {
+            _victoryThemeInstance.stop(IMMEDIATE);
+            _defeatThemeInstance.stop(IMMEDIATE);
+            _drownThemeInstance.stop(IMMEDIATE);
+            
             _exteriorTransform.position = Vector3.up * _exteriorHeightDistance;
-            _underWater.start();
+            _underWaterInstance.start();
+            _mainThemeInstance.start();
         }
         void SetupWhenArrivedToSurface()
         {
-            _underWater.stop(STOP_MODE.IMMEDIATE);
+            _underWaterInstance.stop(IMMEDIATE);
+            _mainThemeInstance.stop(ALLOWFADEOUT);
+            _mainThemeEndInstance.start();
         }
-        
-        
+        void SetupVictoryScene() => _victoryThemeInstance.start();
+        void SetupDefeatScene() => _defeatThemeInstance.start();
+        void SetupDrownScene()
+        {
+            _underWaterInstance.stop(ALLOWFADEOUT);
+            _mainThemeInstance.stop(ALLOWFADEOUT);
+            _drownThemeInstance.start();
+        }
     }
 }
