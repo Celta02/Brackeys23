@@ -14,6 +14,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -42,34 +43,36 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 10
-    - _Metallic: 0.1
+    - _FoamOffset: 5
+    - _Metallic: 1.3
     - _NoiseScale: 5
-    - _NoiseStrength: 0.1
+    - _NoiseStrength: 0.2
     - _NormalStrength: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RippleDensity: 14
-    - _RippleDissolve: 4.75
+    - _RippleDensity: 23.23
+    - _RippleDissolve: 3.6
     - _RippleSpeed: 0.75
-    - _Smoothness: 0.3
+    - _Smoothness: 0.01
     - _SrcBlend: 1
     - _Surface: 1
-    - _Transparency: 0.2
+    - _Transparency: 0.75
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.013705952, g: 0.111152805, b: 0.41509432, a: 0}
-    - _Emission: {r: 0.20896, g: 0.733867, b: 1.429017, a: 0}
+    - _Color: {r: 0.03163936, g: 0.3058785, b: 0.745283, a: 0}
+    - _Emission: {r: 0.6312177, g: 1.72665, b: 3.11205, a: 1}
+    - _FoamColor: {r: 1.018868, g: 1.3584906, b: 1.3415264, a: 0.6313726}
     - _NoiseSpeed: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1332118648207567142

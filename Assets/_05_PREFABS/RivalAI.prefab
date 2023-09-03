@@ -1075,6 +1075,7 @@ GameObject:
   - component: {fileID: 5260657567914127042}
   - component: {fileID: 7380281176380751494}
   - component: {fileID: 7103623266772151257}
+  - component: {fileID: 1619338920895029851}
   m_Layer: 7
   m_Name: RivalAI
   m_TagString: Untagged
@@ -1199,6 +1200,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationEvents: {fileID: 2839146481359392898}
   _rival: {fileID: 5906231258501394915}
+--- !u!114 &1619338920895029851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899283203667291895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea33eefaecf4b22ab74d675f7f77971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 4986369099638733715}
+  _initialSpeed: 6
 --- !u!1 &7742885753964632989
 GameObject:
   m_ObjectHideFlags: 0

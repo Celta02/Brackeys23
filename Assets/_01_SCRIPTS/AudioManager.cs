@@ -44,6 +44,7 @@ namespace CeltaGames
         void OnEnable()
         {
             GamePlayManager.Instance.StartMainSceneEvent += SetupMainScene;
+            GamePlayManager.Instance.EnteredToTheWaterEvent += SetupEnteringToTheWater;
             GamePlayManager.Instance.ArrivedToSurfaceEvent += SetupWhenArrivedToSurface;
             GamePlayManager.Instance.StartVictorySceneEvent += SetupVictoryScene;
             GamePlayManager.Instance.StartDefeatSceneEvent += SetupDefeatScene;
@@ -52,6 +53,7 @@ namespace CeltaGames
         void OnDisable()
         {
             GamePlayManager.Instance.StartMainSceneEvent -= SetupMainScene;
+            GamePlayManager.Instance.EnteredToTheWaterEvent -= SetupEnteringToTheWater;
             GamePlayManager.Instance.ArrivedToSurfaceEvent -= SetupWhenArrivedToSurface;
             GamePlayManager.Instance.StartVictorySceneEvent -= SetupVictoryScene;
             GamePlayManager.Instance.StartDefeatSceneEvent -= SetupDefeatScene;
@@ -80,9 +82,13 @@ namespace CeltaGames
             _drownThemeInstance.stop(IMMEDIATE);
             
             _exteriorTransform.position = Vector3.up * _exteriorHeightDistance;
+        }
+        void SetupEnteringToTheWater()
+        {
             _underWaterInstance.start();
             _mainThemeInstance.start();
         }
+
         void SetupWhenArrivedToSurface()
         {
             _underWaterInstance.stop(IMMEDIATE);

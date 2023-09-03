@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -28,15 +29,24 @@ namespace CeltaGames
         Tween _strokeFirstTween;
         Tween _strokeSecondTween;
         
-        void Start()
+        void OnEnable()
         {
-            InitialImpulse();
+            GamePlayManager.Instance.EnteredToTheWaterEvent += InitialImpulse;
             _animationEvents.BreaststrokeImpulse += BreaststrokeImpulse;
             _animationEvents.StartTurningAround += TurnAroundDeceleration;
             _animationEvents.StopTurningAround += TurnAroundImpulse;
             _animationEvents.StopSwimming += StopMovement;
         }
-        
+
+        void OnDisable()
+        {
+            GamePlayManager.Instance.EnteredToTheWaterEvent -= InitialImpulse;
+            _animationEvents.BreaststrokeImpulse -= BreaststrokeImpulse;
+            _animationEvents.StartTurningAround -= TurnAroundDeceleration;
+            _animationEvents.StopTurningAround -= TurnAroundImpulse;
+            _animationEvents.StopSwimming -= StopMovement;
+        }
+
         void InitialImpulse()
         {
             _currentSpeed = _initialSpeed;

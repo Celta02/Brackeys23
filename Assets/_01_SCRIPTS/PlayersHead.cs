@@ -1,5 +1,8 @@
 ﻿
 namespace CeltaGames
 {
-    public class PlayersHead : Head { }
+    public class PlayersHead : Head
+    {
+
+    }
 }

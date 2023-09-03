@@ -12,15 +12,14 @@ namespace CeltaGames
         IObservable<long> _timerObservable;
         public IObservable<long> TimerObservable => _timerObservable;
 
-        public void StartTimer()
+        void OnEnable() => GamePlayManager.Instance.EnteredToTheWaterEvent += StartTimer;
+        void OnDisable() => GamePlayManager.Instance.EnteredToTheWaterEvent -= StartTimer;
+        
+        void StartTimer()
         {
             _timerObservable = Observable.Interval(TimeSpan.FromSeconds(0.1f));
             _startTimer?.Invoke(this);
         }
 
-        void Start()
-        {
-            StartTimer();
-        }
     }
 }

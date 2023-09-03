@@ -19,9 +19,9 @@ namespace CeltaGames
                 if (i > 0) playerName = playerName.Remove(i, playerName.Length - i);
 
                 var displaySingle = new LeaderboardDisplaySingle(
-                    playerData.rank.ToString()
+                    $"{playerData.rank + 1}"
                     ,playerName
-                    ,$"{playerData.score+1:F2}");
+                    ,$"{playerData.score:F2}");
 
                 var displaySingleUI = Instantiate(_displaySingleUI, _frame);
                 displaySingleUI.ShowPlayerInfo(displaySingle);

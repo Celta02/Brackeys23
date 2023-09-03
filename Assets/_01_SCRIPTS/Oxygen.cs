@@ -20,8 +20,17 @@ namespace CeltaGames
         public float InitialOxygen => _initialOxygen;
 
         
-        void OnEnable() => _controls.Enable();
-        void OnDisable() => _controls.Disable();
+        void OnEnable()
+        {
+            _controls.Enable();
+            GamePlayManager.Instance.EnteredToTheWaterEvent += StartApnea;
+        }
+
+        void OnDisable()
+        {
+            _controls.Disable();
+            GamePlayManager.Instance.EnteredToTheWaterEvent -= StartApnea;
+        }
 
         void Awake() => _controls = new PlayerControls();
 
@@ -30,7 +39,6 @@ namespace CeltaGames
             _currentOxygen.Value = _initialOxygen;
             _controls.Player.Breaststroke.started += StrokeOxygenConsumption;
             _animationEvents.StopSwimming += StopOxygenConsumption;
-            StartApnea();
         }
 
         void StartApnea()
@@ -45,8 +53,10 @@ namespace CeltaGames
         void ReduceOxygen(float consumption)
         {
             _currentOxygen.Value -= consumption;
-            if(_currentOxygen.Value <=0f)
-                GamePlayManager.Instance.LoadDrownScene();
+            
+            if (!(_currentOxygen.Value <= 0f)) return;
+            GamePlayManager.Instance.LoadDrownScene();
+            StopOxygenConsumption();
         }
         void StopOxygenConsumption() => _isInApnea = false;
     }

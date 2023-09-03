@@ -10,6 +10,7 @@ namespace CeltaGames
         public event Action OpenRegisterNameEvent = delegate {};
         public event Action CloseRegisterNameEvent = delegate {};
         public event Action StartMainSceneEvent = delegate {};
+        public event Action EnteredToTheWaterEvent = delegate {};
         public event Action ArrivedToSurfaceEvent = delegate {};
         public event Action StartVictorySceneEvent = delegate {};
         public event Action StartDefeatSceneEvent = delegate {};
@@ -67,6 +68,7 @@ namespace CeltaGames
             StartDefeatSceneEvent?.Invoke();
         }
 
+        public void EnteredToTheWater() => EnteredToTheWaterEvent?.Invoke();
         public void ArrivedToSurface() => ArrivedToSurfaceEvent?.Invoke();
         public async void Win(float bestScore)
         {
@@ -78,5 +80,6 @@ namespace CeltaGames
         }
 
         public void Defeat() => LoadDefeatScene();
+
     }
 }

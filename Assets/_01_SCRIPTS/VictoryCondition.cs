@@ -1,11 +1,10 @@
 ﻿using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CeltaGames
 {
-    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(SurfaceTrigger))]
     public class VictoryCondition : MonoBehaviour
     {
         [SerializeField] DiveMeter _diveMeter;
@@ -13,36 +12,16 @@ namespace CeltaGames
         [SerializeField] PlayerBehaviourRecord _record;
 
         SaveManager _saveManager;
-        Collider _collider;
+        SurfaceTrigger _surfaceTrigger;
         float _bestRecord;
-        bool _playerHasReached;
-        bool _rivalHasReached;
 
-        void Awake() => _collider = GetComponent<Collider>();
+        void Awake() => _surfaceTrigger = GetComponent<SurfaceTrigger>();
         void Start()
         {
             _saveManager = SaveManager.Instance;
-            _collider.OnTriggerEnterAsObservable().Subscribe(OnReachingSurface).AddTo(this);
+            _surfaceTrigger.CheckResults.Subscribe(_ => CheckResults()).AddTo(this);
         }
-
-        void OnReachingSurface(Collider col)
-        {
-            if (col.gameObject.TryGetComponent(out PlayersHead p))
-            {
-                _playerHasReached = true;
-                p.StopSwimming();
-                GamePlayManager.Instance.ArrivedToSurface();
-            }
-
-            if (col.gameObject.TryGetComponent(out RivalsHead r))
-            {
-                _rivalHasReached = true;
-                r.StopSwimming();
-            }
-
-            if (_playerHasReached && _rivalHasReached)
-                CheckResults();
-        }
+        
 
         async void CheckResults()
         {
